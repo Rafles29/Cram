@@ -8,25 +8,27 @@ public class Brick {
     private Point second;
 
     public Brick(Point first, Point second) {
-        this.first = first;
-        this.second = second;
+
+        if (check(first,second)){
+            this.first = first;
+            this.second = second;
+        }
+        else throw new IllegalArgumentException("Punkty muszą być obok siebie");
+    }
+    private boolean check(Point first, Point second) {
+        if (first.equals(second)) return false;
+        if (Math.abs(first.getX() - second.getX()) == 1 && Math.abs(first.getY() - second.getY()) == 0) return true;
+        if (Math.abs(first.getX() - second.getX()) == 0 && Math.abs(first.getY() - second.getY()) == 1) return true;
+        return false;
     }
 
     public Point getFirst() {
         return first;
     }
-
-    public void setFirst(Point first) {
-        this.first = first;
-    }
-
     public Point getSecond() {
         return second;
     }
 
-    public void setSecond(Point second) {
-        this.second = second;
-    }
     public Point[] getPoints() {
         Point[] points = new Point[2];
         points[0] = getFirst();
