@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 /**
  * Created by rwozn on 05.01.2017.
  */
@@ -53,6 +55,15 @@ public class Board {
             setPosition(b.getSecond());
         }
     }
+    public int freePositions(){
+        int suma = 0;
+        for (int i=0;i<getDimension();i++){
+            for (int j=0; j<getDimension();j++){
+                if (this.board[i][j] == 0) suma++;
+            }
+        }
+        return suma;
+    }
     @Override
     public String toString() {
         StringBuilder answer = new StringBuilder();
@@ -69,7 +80,7 @@ public class Board {
     }
 
     @Override
-    protected Object clone() throws CloneNotSupportedException {
+    protected Board clone() throws CloneNotSupportedException {
 
         int[][] secboard = new int[this.dimension][this.dimension];
         for(int i=0;i<this.dimension;i++){
@@ -78,5 +89,24 @@ public class Board {
             }
         }
         return new Board(secboard);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Board board1 = (Board) o;
+
+        if (getDimension() != board1.getDimension()) return false;
+        return Arrays.deepEquals(getBoard(), board1.getBoard());
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Arrays.deepHashCode(getBoard());
+        result = 31 * result + getDimension();
+        return result;
     }
 }

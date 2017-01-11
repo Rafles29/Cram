@@ -1,8 +1,6 @@
 package com.company.rafles;
 
-import model.Board;
-import model.Brick;
-import model.Point;
+import model.*;
 
 public class Main {
 
@@ -18,8 +16,10 @@ public class Main {
 
         bd.setBrick(b);
         bd.setBrick(b2);
-
-        System.out.println(bd);
-        System.out.println(bd.placeBrick(b));
+        State st = new State(bd, Player.Me);
+        System.out.println(st);
+        Graph gp = new Graph();
+        gp.addState(st);
+        System.out.println(gp);
     }
 }
