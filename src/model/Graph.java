@@ -8,7 +8,7 @@ import java.util.Collection;
  */
 public class Graph {
     private ArrayList<State> graph;
-    private static int states = 0;
+    private  int states = 0;
 
     public Graph() {
         this.graph = new ArrayList<>();
@@ -16,6 +16,11 @@ public class Graph {
     public Graph(ArrayList<State> graph) {
         this.graph = graph;
     }
+
+    public int getStates() {
+        return this.states;
+    }
+
     public boolean addState(State state) {
         if (!this.graph.contains(state)) {
             this.graph.add(state);

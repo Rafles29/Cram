@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by rwozn on 11.01.2017.
  */
 public class State {
+    private int name;
     private ArrayList<Integer> fathers;
     private ArrayList<Integer> sons;
     private Board board;
@@ -24,6 +25,14 @@ public class State {
         this.player = player;
         this.fathers = new ArrayList<>();
         this.sons = new ArrayList<>();
+    }
+
+    public int getName() {
+        return name;
+    }
+
+    public void setName(int name) {
+        this.name = name;
     }
 
     public ArrayList<Integer> getFathers() {
@@ -67,13 +76,14 @@ public class State {
 
     @Override
     public String toString() {
-        return "State{" +
-                "fathers=" + fathers +
-                ", sons=" + sons +
-                ", board=" + board +
-                ", player=" + player +
-                ", winner=" + winner +
-                '}';
+        return "State{" + '\n' +
+                "name=" + name + '\n' +
+                "fathers=" + fathers + '\n' +
+                ",sons=" + sons + '\n' +
+                ",board=" + board + '\n' +
+                ",player=" + player + '\n' +
+                ",winner=" + winner + '\n' +
+                '}' +'\n';
     }
     @Override
     public boolean equals(Object o) {

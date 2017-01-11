@@ -9,10 +9,13 @@ public class GenerateGraph {
     public static Graph generate(Board board, Player player){
         Graph gp = new Graph();
         gp.addState(board,player);
-        ArrayList<State> kids = generateKids(gp.getState(0));
-        for (int i=0; i<kids.size();i++) {
-            gp.addState(kids.get(i));
-        }
+        gp.getState(0).setName(gp.getStates()-1);
+
+        makeKids(gp,gp.getState(0));
+        makeKids(gp,gp.getState(1));
+        makeKids(gp,gp.getState(2));
+        makeKids(gp,gp.getState(3));
+        makeKids(gp,gp.getState(4));
         return gp;
     }
     private static ArrayList<State> generateKids(State state) {
@@ -37,6 +40,7 @@ public class GenerateGraph {
                         Board tempBD = bd.clone();
                         tempBD.setBrick(br);
                         State tempState = new State(tempBD,changePlayer(state.getPlayer()));
+                        tempState.addFather(state.getName());
                         answer.add(tempState);
                     }
                 }
@@ -44,6 +48,17 @@ public class GenerateGraph {
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
+    }
+    private static void makeKids(Graph graph,State father){
+        ArrayList<State> kids = generateKids(father);
+        for (int i=0; i<kids.size();i++) {
+            int name =graph.getStates();
+            kids.get(i).setName(name);
+            // tutaj zmienic że jak nie można dodać statnu to oznacza że ten stan już isnieje i trzeba go wyszukać i dodać do niego ojca a ojcu dodać dziecko o wyszukanej nazwie
+            graph.addState(kids.get(i));
+            graph.getState(father.getName()).addSon(name);
+        }
+
 
     }
 }
