@@ -9,14 +9,13 @@ public class GenerateGraph {
     public static Graph generate(Board board, Player player){
         Graph gp = new Graph();
         gp.addState(board,player);
-
-
-
-
-
+        ArrayList<State> kids = generateKids(gp.getState(0));
+        for (int i=0; i<kids.size();i++) {
+            gp.addState(kids.get(i));
+        }
         return gp;
     }
-    private ArrayList<State> generateKids(State state) {
+    private static ArrayList<State> generateKids(State state) {
         Board bd = state.getBoard();
         ArrayList<State> answer = new ArrayList<>();
         addKid(answer,bd,state,1,0);
@@ -25,11 +24,11 @@ public class GenerateGraph {
         return new ArrayList<>(answer);
 
     }
-    private Player changePlayer(Player player){
+    private static Player changePlayer(Player player){
         if (player == Player.Me) return Player.Opponent;
         else return Player.Me;
     }
-    private void addKid(ArrayList<State> answer,Board bd, State state, int offI, int offJ) {
+    private static void addKid(ArrayList<State> answer,Board bd, State state, int offI, int offJ) {
         try {
             for (int i=0;i<bd.getDimension()-offI;i++) {
                 for (int j=0;j<bd.getDimension()-offJ;j++) {
