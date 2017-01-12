@@ -67,9 +67,6 @@ public class Brick {
 
     @Override
     public String toString() {
-        return "Brick{" +
-                "first=" + first +
-                ", second=" + second +
-                '}';
+        return first + " " + second;
     }
 }
