@@ -20,15 +20,17 @@ public class Main {
         Brick b3 = new Brick(p5,p6);
         Brick b4 = new Brick(p7,p8);
 
-        Board bd = new Board(4);
+        Board bd = new Board(3);
         bd.setBrick(b);
-        bd.setBrick(b2);
-        bd.setBrick(b3);
-        bd.setBrick(b4);
+        //bd.setBrick(b2);
+        //bd.setBrick(b3);
+        //bd.setBrick(b4);
 
         if(GenerateGraph.itsTime(bd)) {
             Graph gp = GenerateGraph.generateRecursive(bd,Player.Me);
             System.out.println(gp);
+            DecisionMaker dc = new DecisionMaker();
+            System.out.println(dc.decide(gp));
         }
     }
 }

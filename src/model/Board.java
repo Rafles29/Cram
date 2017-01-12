@@ -22,13 +22,16 @@ public class Board {
         }
         this.dimension = dimension;
     }
+    public int getPosition(int x, int y){
+        return 1;
+    }
     public int[][] getBoard() {
         return board;
     }
     public int getDimension() {
         return dimension;
     }
-    private boolean checkPosition(Point p) {
+    public boolean checkPosition(Point p) {
         if (p.getX() >= getDimension() || p.getY() >= getDimension()) throw new IllegalArgumentException("Punkt jest poza plansza");
         if (this.board[p.getY()][p.getX()] == 0) {
             return true;
