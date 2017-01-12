@@ -78,7 +78,7 @@ public class State {
     }
     @Override
     public String toString() {
-        return "State{" + '\n' +
+        return '\n' + "State{" + '\n' +
                 "name=" + name + '\n' +
                 "fathers=" + fathers + '\n' +
                 ",sons=" + sons + '\n' +

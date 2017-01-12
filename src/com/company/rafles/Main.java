@@ -20,17 +20,12 @@ public class Main {
         Brick b3 = new Brick(p5,p6);
         Brick b4 = new Brick(p7,p8);
 
-        Board bd = new Board(3);
-        bd.setBrick(b);
-        bd.setBrick(b2);
-        bd.setBrick(b3);
+        Board bd = new Board(4);
+        //bd.setBrick(b);
+        //bd.setBrick(b2);
+        //bd.setBrick(b3);
         //bd.setBrick(b4);
 
-        State st = new State(bd, Player.Me);
-        //Graph gpGen = GenerateGraph.generate(bd,Player.Me);
-        //System.out.println(gpGen);
-       // System.out.println(st);
-        //System.out.println(st.isTerminal());
         Graph gp = GenerateGraph.generateRecursive(bd,Player.Me);
         System.out.println(gp);
     }

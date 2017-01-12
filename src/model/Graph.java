@@ -44,7 +44,6 @@ public class Graph {
     public State getState(int state) {
         return this.graph.get(state);
     }
-
     @Override
     public String toString() {
         return "Graph{" +

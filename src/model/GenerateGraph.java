@@ -19,6 +19,7 @@ public class GenerateGraph {
         makeKids(gp,gp.getState(4));
         return gp;
     }
+    //rekurencyjnie tworzy pełen graf od danego stanu
     public static Graph generateRecursive(Board board, Player player){
         Graph gp = new Graph();
         gp.addState(board,player);
@@ -27,7 +28,7 @@ public class GenerateGraph {
         genRecursive(gp,gp.getState(0));
         return gp;
     }
-    //
+    //rekurencyjnie tworzy graf na podstawie dostarczonego ojca
     private static void genRecursive(Graph graf, State state) {
         if(!state.isTerminal()){
             int before = graf.getStates();
@@ -36,6 +37,18 @@ public class GenerateGraph {
             for (int i=0;i<after-before;i++){
                 genRecursive(graf,graf.getState(before+i));
             }
+            ArrayList<Integer> sons = state.getSons();
+            for (int son: sons){
+                if(graf.getState(son).isWinner()) {
+                    state.setWinner(true);
+                }
+            }
+
+        }else if(state.getPlayer() == Player.Opponent){
+            state.setWinner(true);
+
+        }else{
+            state.setWinner(false);
         }
     }
     // Wytwarza wszystkie możliwe dzieci i łączy je z ojcem
