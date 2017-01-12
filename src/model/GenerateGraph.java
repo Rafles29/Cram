@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by rwozn on 11.01.2017.
  */
 public class GenerateGraph {
+    private static int maxKids = 15;
     //generuje pełen graf od danego stanu
     public static Graph generate(Board board, Player player){
         Graph gp = new Graph();
@@ -27,6 +28,29 @@ public class GenerateGraph {
 
         genRecursive(gp,gp.getState(0));
         return gp;
+    }
+    private static int itsNow(Board board,int offI, int offJ){
+
+        int temp=0;
+        for (int i=0;i<board.getDimension()-offI;i++) {
+            for (int j=0;j<board.getDimension()-offJ;j++) {
+                Brick br = new Brick(new Point(i,j), new Point(i+offI,j+offJ));
+                if (board.placeBrick(br)) temp++;
+            }
+        }
+        return temp;
+    }
+    public static boolean itsTime(Board board) {
+        int sum=0;
+        sum+=itsNow(board,1,0);
+        sum+=itsNow(board,0,1);
+        System.out.println(sum);
+        if(sum < maxKids) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     //rekurencyjnie tworzy graf na podstawie dostarczonego ojca
     private static void genRecursive(Graph graf, State state) {
