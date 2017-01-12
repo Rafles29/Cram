@@ -38,6 +38,9 @@ public class Graph {
         }else
             return false;
     }
+    public int indexOf(State state){
+        return graph.indexOf(state);
+    }
     public State getState(int state) {
         return this.graph.get(state);
     }

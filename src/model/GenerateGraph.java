@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by rwozn on 11.01.2017.
  */
 public class GenerateGraph {
+    //generuje pełen graf od danego stanu
     public static Graph generate(Board board, Player player){
         Graph gp = new Graph();
         gp.addState(board,player);
@@ -18,6 +19,41 @@ public class GenerateGraph {
         makeKids(gp,gp.getState(4));
         return gp;
     }
+    public static Graph generateRecursive(Board board, Player player){
+        Graph gp = new Graph();
+        gp.addState(board,player);
+        gp.getState(0).setName(gp.getStates()-1);
+
+        genRecursive(gp,gp.getState(0));
+        return gp;
+    }
+    //
+    private static void genRecursive(Graph graf, State state) {
+        if(!state.isTerminal()){
+            int before = graf.getStates();
+            makeKids(graf,state);
+            int after = graf.getStates();
+            for (int i=0;i<after-before;i++){
+                genRecursive(graf,graf.getState(before+i));
+            }
+        }
+    }
+    // Wytwarza wszystkie możliwe dzieci i łączy je z ojcem
+    private static void makeKids(Graph graph,State father){
+        ArrayList<State> kids = generateKids(father);
+        for (int i=0; i<kids.size();i++) {
+            int name =graph.getStates();
+            kids.get(i).setName(name);
+            if(graph.addState(kids.get(i))) {
+                graph.getState(father.getName()).addSon(name);
+            }else {
+                int index = graph.indexOf(kids.get(i));
+                graph.getState(index).addFather(father.getName());
+                graph.getState(father.getName()).addSon(index);
+            }
+        }
+    }
+    //generuje liste wszystkich dzeci
     private static ArrayList<State> generateKids(State state) {
         Board bd = state.getBoard();
         ArrayList<State> answer = new ArrayList<>();
@@ -27,10 +63,13 @@ public class GenerateGraph {
         return new ArrayList<>(answer);
 
     }
+
+    //zmienia gracza
     private static Player changePlayer(Player player){
         if (player == Player.Me) return Player.Opponent;
         else return Player.Me;
     }
+    //dodaje do listy answer wszyskie mozliwe to utworzenia dzieci (pionowo lub poziomo)
     private static void addKid(ArrayList<State> answer,Board bd, State state, int offI, int offJ) {
         try {
             for (int i=0;i<bd.getDimension()-offI;i++) {
@@ -48,17 +87,5 @@ public class GenerateGraph {
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
-    }
-    private static void makeKids(Graph graph,State father){
-        ArrayList<State> kids = generateKids(father);
-        for (int i=0; i<kids.size();i++) {
-            int name =graph.getStates();
-            kids.get(i).setName(name);
-            // tutaj zmienic że jak nie można dodać statnu to oznacza że ten stan już isnieje i trzeba go wyszukać i dodać do niego ojca a ojcu dodać dziecko o wyszukanej nazwie
-            graph.addState(kids.get(i));
-            graph.getState(father.getName()).addSon(name);
-        }
-
-
     }
 }

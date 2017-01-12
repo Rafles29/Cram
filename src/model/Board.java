@@ -64,6 +64,18 @@ public class Board {
         }
         return suma;
     }
+    public boolean placeBricks(int offI, int offJ){
+        for (int i=0;i<getDimension()-offI;i++) {
+            for (int j=0;j<getDimension()-offJ;j++) {
+                Brick br = new Brick(new Point(i,j), new Point(i+offI,j+offJ));
+                if (placeBrick(br)) return true;
+            }
+        }
+        return false;
+    }
+    public boolean isTerminal() {
+        return !(placeBricks(0,1) || placeBricks(1,0));
+    }
     @Override
     public String toString() {
         StringBuilder answer = new StringBuilder();

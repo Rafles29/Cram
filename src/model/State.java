@@ -73,7 +73,9 @@ public class State {
     public int freePostions() {
         return this.board.freePositions();
     }
-
+    public boolean isTerminal() {
+        return board.isTerminal();
+    }
     @Override
     public String toString() {
         return "State{" + '\n' +
