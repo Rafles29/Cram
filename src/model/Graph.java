@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by rwozn on 11.01.2017.

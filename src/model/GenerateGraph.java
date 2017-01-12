@@ -44,7 +44,6 @@ public class GenerateGraph {
         int sum=0;
         sum+=itsNow(board,1,0);
         sum+=itsNow(board,0,1);
-        System.out.println(sum);
         if(sum < maxKids) {
             return true;
         }

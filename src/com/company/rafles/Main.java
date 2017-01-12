@@ -28,9 +28,11 @@ public class Main {
 
         if(GenerateGraph.itsTime(bd)) {
             Graph gp = GenerateGraph.generateRecursive(bd,Player.Me);
-            System.out.println(gp);
+            //System.out.println(gp);
             DecisionMaker dc = new DecisionMaker();
             System.out.println(dc.decide(gp));
         }
+        System.out.println(RandomMaker.nextMove(bd));
+
     }
 }

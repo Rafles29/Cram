@@ -12,10 +12,8 @@ public class DecisionMaker {
 
     public Brick decide(Graph graph){
         ArrayList<Integer> winners= choseWinners(graph);
-        System.out.println(winners);
         if(winners.size() == 0) throw new UnsupportedOperationException("Przegraliśmy");
         int myWinner = choseState(winners);
-        System.out.println(myWinner);
 
         return differnce(graph.getState(0),graph.getState(myWinner));
     }
@@ -32,7 +30,6 @@ public class DecisionMaker {
     private int choseState(ArrayList<Integer> winners){
         int size = winners.size();
             Random random = new Random();
-            System.out.println("Moj wybor"+size);
             int choice = random.nextInt(size);
             return winners.get(choice);
     }
