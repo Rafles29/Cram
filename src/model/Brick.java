@@ -45,6 +45,12 @@ public class Brick {
 
         return position;
     }
+    public void prepare(){
+        first.setX(first.getX()+1);
+        first.setY(first.getY()+1);
+        second.setX(second.getX()+1);
+        second.setY(second.getY()+1);
+    }
 
     @Override
     public boolean equals(Object o) {

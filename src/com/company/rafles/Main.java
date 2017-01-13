@@ -44,25 +44,27 @@ public class Main {
             }
             if (inp != null && !("START".equals(inp.toUpperCase()))) {
                 String[] elements = inp.trim().split(" ");
-                int[] coords = new int[4];
+                int[] call = new int[4];
                 int i = 0;
                 for (String e : elements) {
-                    coords[i++] = (Integer.parseInt(e)) - 1;
+                    call[i++] = (Integer.parseInt(e)) - 1;
                 }
-                Point pa = new Point(coords[0],coords[1]);
-                Point pb = new Point(coords[2],coords[3]);
+                Point pa = new Point(call[0],call[1]);
+                Point pb = new Point(call[2],call[3]);
                 Brick brick = new Brick(pa,pb);
                 board.setBrick(brick);
             }
             if(GenerateGraph.itsTime(board)) {
                 Graph gp = GenerateGraph.generateRecursive(board,Player.Me);
-                System.out.println(gp);
                 DecisionMaker dc = new DecisionMaker();
                 Brick answer = dc.decide(gp);
-                board.placeBrick(answer);
+                board.setBrick(answer);
+                answer.prepare();
                 System.out.println(answer);
             } else {
                 Brick answer = RandomMaker.nextMove(board);
+                board.setBrick(answer);
+                answer.prepare();
                 System.out.println(answer);
             }
 
